@@ -150,7 +150,7 @@ pwa:
 paginate: 10
 
 # The base URL of your site
-baseurl: "/shismo-api-docs"
+baseurl: "/scripter-api-docs"
 
 # ------------ The following options are not recommended to be modified ------------------
 
