@@ -1,7 +1,7 @@
 ---
 layout: page  # Or any layout defined in your theme
 title: "Example Page"
-permalink: /bank/  # URL path for the page
+permalink: /scripter-api-docs/bank/  # URL path for the page
 ---
 
 # Bank Utilities (`utils.bank`)
