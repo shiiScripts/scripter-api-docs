@@ -6,6 +6,7 @@ title: Errors
 
 # Errors
 
+TBA
 <!-- <aside class="notice">This error section is stored in a separate file, errors.md. DocuAPI allows you to split the single page documentation in as many files as needed. Files are included in the  default Hugo page order . One way of ordering the pages is by setting the page `weight` in the front matter. Pages with lower weight will be listed first.</aside>
 
 The Kittn API uses the following error codes:
