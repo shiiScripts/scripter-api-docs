@@ -45,7 +45,6 @@ jobs:
       - name: Install PostCSS and other dependencies
         run: |
           npm install -g postcss postcss-cli
-          npm install
       - name: Install Dart Sass
         run: sudo snap install dart-sass
       - name: Checkout
