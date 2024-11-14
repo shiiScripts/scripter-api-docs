@@ -25,6 +25,7 @@ First, enable the Shismo Scripter plugin and navigate to the white pencil icon o
 
 
 ![Description of Image](/images/Scripter.png)
+
 ## Functions
 > Query:
 
