@@ -23,7 +23,8 @@ System.out.println("The code examples are here!");
 ## Getting Started
 First, enable the Shismo Scripter plugin and navigate to the white pencil icon on the right. Once this panel is open, there are multiple options to choose from.
 
-![Scripter Image](../../images/panel.png)
+![Scripter Image](scripter-api-docs/images/panel.png)
+
 ## Functions
 > Query:
 
