@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>
+      Guides
+    </title>
+    
+
+
+
+
+
+  
+  
+
+<link
+  href="/scss/slate/screen.css.scss"
+  rel="stylesheet"
+  media="screen"
+  integrity="" />
+<link
+  href="/scss/slate/print.css.scss"
+  rel="stylesheet"
+  media="print"
+  integrity="" />
+
+    
+
+
+
+
+  
+
+<script
+  src="/js/index.01cd09825b410cf389c38500360a116f7df6791cd2f18768de2be24c92204a16.js"
+  integrity="sha256-Ac0JgltBDPOJw4UANgoRb332eRzS8Ydo3iviTJIgShY="
+  defer></script>
+
+    
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body class="index" x-data="{ navOpen: false }" x-cloak>
+    <a
+      href="#"
+      id="nav-button"
+      @click="navOpen = !navOpen"
+      :class="{'open': navOpen }">
+      <span>
+        NAV
+        <img src="/images/navbar.png" />
+      </span>
+    </a>
+    <div class="toc-wrapper" :class="{'open': navOpen }">
+      
+      <img src="/images/logo.png" class="logo" />
+
+      
+        <div class="search" x-data="searchController">
+          <input
+            x-model.debounce.100ms="query"
+            type="search"
+            class="search"
+            id="input-search"
+            placeholder="Search" />
+          <ul
+            class="search-results visible"
+            x-show="results.length > 0"
+            x-transition.duration.700ms>
+            <template x-for="item in results">
+              <li>
+                <a x-text="item.title" :href="`#${item.id}`"></a>
+              </li>
+            </template>
+          </ul>
+        </div>
+      
+      
+  
+  
+    
+  
+  <ul
+    id="toc"
+    class="toc-list-h1"
+    x-data="tocController"
+    x-init="load([{&#34;id&#34;:&#34;introduction&#34;,&#34;level&#34;:1,&#34;sub&#34;:[],&#34;title&#34;:&#34;Introduction&#34;},{&#34;id&#34;:&#34;guides&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;id&#34;:&#34;getting-started&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;Getting Started&#34;},{&#34;id&#34;:&#34;functions&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;Functions&#34;},{&#34;id&#34;:&#34;code-editor&#34;,&#34;level&#34;:2,&#34;sub&#34;:[],&#34;title&#34;:&#34;Code Editor&#34;}],&#34;title&#34;:&#34;Guides&#34;},{&#34;id&#34;:&#34;bindings&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;id&#34;:&#34;client&#34;,&#34;level&#34;:2,&#34;sub&#34;:[{&#34;id&#34;:&#34;itemid&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;ItemID&#34;},{&#34;id&#34;:&#34;npcid&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;NpcID&#34;},{&#34;id&#34;:&#34;objectid&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;ObjectID&#34;}],&#34;title&#34;:&#34;Client&#34;},{&#34;id&#34;:&#34;utils&#34;,&#34;level&#34;:2,&#34;sub&#34;:[],&#34;title&#34;:&#34;Utils&#34;}],&#34;title&#34;:&#34;Bindings&#34;},{&#34;id&#34;:&#34;bank-queries&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;id&#34;:&#34;isopen&#34;,&#34;level&#34;:2,&#34;sub&#34;:[],&#34;title&#34;:&#34;isOpen()&#34;}],&#34;title&#34;:&#34;Bank Queries&#34;},{&#34;id&#34;:&#34;bank-commands&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;id&#34;:&#34;openbank&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;openBank()&#34;},{&#34;id&#34;:&#34;closebank&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;closeBank()&#34;},{&#34;id&#34;:&#34;depositxofitem&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;depositXOfItem()&#34;},{&#34;id&#34;:&#34;depositallofitems&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;depositAllOfItems()&#34;},{&#34;id&#34;:&#34;withdrawxofitem&#34;,&#34;level&#34;:2,&#34;sub&#34;:[],&#34;title&#34;:&#34;withdrawXOfItem()&#34;}],&#34;title&#34;:&#34;Bank Commands&#34;},{&#34;id&#34;:&#34;errors&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;id&#34;:&#34;4xx&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;4xx&#34;},{&#34;id&#34;:&#34;5xx&#34;,&#34;level&#34;:2,&#34;sub&#34;:[],&#34;title&#34;:&#34;5xx&#34;}],&#34;title&#34;:&#34;Errors&#34;}])"
+    @scroll.window="onScroll()">
+    
+    <template x-for="row in rows">
+      <li>
+        <a
+          x-text="row.title"
+          @click="click(row)"
+          :href="`#${row.id}`"
+          class="toc-link"
+          x-bind="rowClass(row)"></a>
+        
+          <ul x-show="row.open" x-bind="transitions()" class="da-toc-list-h2">
+            <template x-for="row in row.sub">
+              <li>
+                <a
+                  x-text="row.title"
+                  @click="click(row)"
+                  :href="`#${row.id}`"
+                  class="toc-link"
+                  x-bind="rowClass(row)"></a>
+                
+                  <ul
+                    x-show="row.open"
+                    x-bind="transitions()"
+                    class="toc-list-h3">
+                    <template x-for="row in row.sub">
+                      <li>
+                        <a
+                          x-text="row.title"
+                          @click="click(row)"
+                          :href="`#${row.id}`"
+                          class="toc-link"
+                          x-bind="rowClass(row)"></a>
+                      </li>
+                    </template>
+                  </ul>
+                
+              </li>
+            </template>
+          </ul>
+        
+      </li>
+    </template>
+  </ul>
+
+      
+      
+      
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+    
+
+
+
+
+
+<h1 id="introduction">Introduction</h1>
+<p>Shismo Scripter is a plugin which reads and executes code based on both Shismo&rsquo;s and RuneLite&rsquo;s inbuilt APIs. You can create your own completely customisable automated scripts written in Java/Groovy.</p>
+<p><strong>How do I use this documentation?</strong></p>
+<p>To your left, there is a table of contents and search bar that will take you to a specific section.</p>
+<p>Once you have found what you want, have a read on what the functions do and view the code examples in the dark area to the right.</p>
+
+
+
+
+  
+
+
+
+<h1 id="guides">Guides</h1>
+<!-- > Code Example:
+
+```java
+System.out.println("The code examples are here!");
+``` -->
+
+
+
+
+  
+
+
+
+<h2 id="getting-started">Getting Started</h2>
+<p>First, enable the Shismo Scripter plugin and navigate to the white pencil icon on the right. Once this panel is open, there are multiple options to choose from.</p>
+<p><img src="/images/Scripter.png" alt="Description of Image"></p>
+
+
+
+
+  
+
+
+
+<h2 id="functions">Functions</h2>
+<blockquote>
+<p>Query:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">boolean</span> isBankOpen <span style="color:#f92672">=</span> utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">isOpen</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">isOpen</span>()){
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//Do stuff</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>WorldPoint playerLocation <span style="color:#f92672">=</span> utils.<span style="color:#a6e22e">player</span>.<span style="color:#a6e22e">getWorldLocation</span>();
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">walk</span>.<span style="color:#a6e22e">walkTo</span>(playerLocation);
+</span></span></code></pre></div><blockquote>
+<p>Command:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">openBank</span>();
+</span></span></code></pre></div><blockquote>
+<p>Event:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">addLog</span>(<span style="color:#e6db74">&#34;Waiting up to 10 seconds for Mr Hans to spawn.&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(utils.<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">npcSpawned</span>(NpcID.<span style="color:#a6e22e">HANS</span>, 10000)) {
+</span></span><span style="display:flex;"><span>	utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">addLog</span>(<span style="color:#e6db74">&#34;Mr Hans spawned in under 10 seconds.&#34;</span>);
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>	utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">addLog</span>(<span style="color:#e6db74">&#34;Mr Hans did not spawn in under 10 seconds.&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">addLog</span>(<span style="color:#e6db74">&#34;Waiting forever until Mr Hans spawns.&#34;</span>);
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">npcSpawned</span>(NpcID.<span style="color:#a6e22e">HANS</span>);
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">addLog</span>(<span style="color:#e6db74">&#34;This will only run if Mr Hans spawns, otherwise it will never run.&#34;</span>);
+</span></span></code></pre></div><p>Shismo Scripter has <strong>three</strong> main types of functions:</p>
+<ul>
+<li>
+<p><strong>Queries:</strong> Returns a value of some type when called.</p>
+</li>
+<li>
+<p><strong>Commands:</strong> Executes an action with no return value.</p>
+</li>
+<li>
+<p><strong>Events:</strong> Waits for an event to occur and pauses script execution. Can also return a boolean if a timeout is specified.</p>
+</li>
+</ul>
+<aside class="warning">
+Events can pause script execution forever if the condition is never satisfied, keep that in mind.
+</aside>
+
+
+
+
+  
+
+
+
+<h2 id="code-editor">Code Editor</h2>
+<p>The inbuilt code editor comes with auto code completion. This is accessible via pressing <code>ctrl + click</code>.</p>
+<aside class="notice">
+Error logs are posted to the in-built script logger. You can access the logger via the button in the Scripter panel.
+</aside>
+
+
+
+
+  
+
+
+
+<h1 id="bindings">Bindings</h1>
+
+
+
+
+  
+
+
+
+<h2 id="client">Client</h2>
+<p>You have access to all common classes in <code>net.runelite.api</code> like <code>WorldPoint</code>, <code>Client</code> etc.</p>
+<p>You can find out more via the official <a href="https://static.runelite.net/api/runelite-api/net/runelite/api/package-summary.html">RuneLite documentation</a>.</p>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">new</span> WorldPoint(420, 69, 0);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>client.<span style="color:#a6e22e">getEnergy</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ItemID.<span style="color:#a6e22e">KNIFE</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NpcID.<span style="color:#a6e22e">HANS</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ObjectID.<span style="color:#a6e22e">ALTAR</span>();
+</span></span></code></pre></div>
+
+
+
+  
+
+
+
+<h3 id="itemid">ItemID</h3>
+<p>Enum class for in game ItemIDs.</p>
+
+
+
+
+  
+
+
+
+<h3 id="npcid">NpcID</h3>
+<p>Enum class for in game NpcIDs.</p>
+
+
+
+
+  
+
+
+
+<h3 id="objectid">ObjectID</h3>
+<p>Enum class for in game ObjectIDs.</p>
+
+
+
+
+  
+
+
+
+<h2 id="utils">Utils</h2>
+<p>A set of common utilities that link to our very own Shismo Utils.</p>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">function</span>();
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">debug</span>.<span style="color:#a6e22e">function</span>();
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">function</span>();
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">inventory</span>.<span style="color:#a6e22e">function</span>();
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">npc</span>.<span style="color:#a6e22e">function</span>();
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">object</span>.<span style="color:#a6e22e">function</span>();
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">player</span>.<span style="color:#a6e22e">function</span>();
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">prayer</span>.<span style="color:#a6e22e">function</span>();
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">walk</span>.<span style="color:#a6e22e">function</span>();
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">widget</span>.<span style="color:#a6e22e">function</span>();
+</span></span></code></pre></div>
+  
+    
+
+
+
+  
+
+
+
+<h1 id="bank-queries">Bank Queries</h1>
+
+
+
+
+  
+
+
+
+<h2 id="isopen">isOpen()</h2>
+<blockquote>
+<p>Overloads:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">isOpen</span>();
+</span></span></code></pre></div><blockquote>
+<p>Returns:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">boolean</span>
+</span></span></code></pre></div><blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">isOpen</span>()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Perform actions while the bank is open</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Checks if the bank interface is currently open.</p>
+<!-- ### HTTP Request
+
+`GET http://example.com/api/kittens`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+include_cats | false | If set to true, the result will also include cats.
+available | true | If set to false, the result will include kittens that have already been adopted. -->
+<aside class="success">
+Remember — the `!` operator can be used to invert the condition!
+</aside>
+
+  
+    
+
+
+
+  
+
+
+
+<h1 id="bank-commands">Bank Commands</h1>
+
+
+
+
+  
+
+
+
+<h2 id="openbank">openBank()</h2>
+<blockquote>
+<p>Overloads:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">openBank</span>();
+</span></span></code></pre></div><blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">isOpen</span>()) {
+</span></span><span style="display:flex;"><span>    utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">openBank</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Opens the bank interface for the player.</p>
+<aside class="notice">Does nothing if a bank cannot be found.</aside>
+<!-- <aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside> -->
+<!-- ### HTTP Request
+
+`GET http://example.com/api/kittens/<ID>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the kitten to retrieve -->
+
+
+
+
+  
+
+
+
+<h2 id="closebank">closeBank()</h2>
+<blockquote>
+<p>Overloads:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">closeBank</span>();
+</span></span></code></pre></div><blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">isOpen</span>()) {
+</span></span><span style="display:flex;"><span>    utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">closeBank</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Closes the bank interface for the player.</p>
+<aside class="notice">Does nothing if the bank isn't open.</aside>
+
+
+
+
+  
+
+
+
+<h2 id="depositxofitem">depositXOfItem()</h2>
+<blockquote>
+<p>Overloads:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">depositXOfItem</span>(<span style="color:#66d9ef">int</span> itemid, <span style="color:#66d9ef">int</span> quantity);
+</span></span></code></pre></div><blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">depositXOfItem</span>(1234, 10);
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">depositXOfItem</span>(ItemID.<span style="color:#a6e22e">KNIFE</span>, 5);
+</span></span></code></pre></div><p>Deposits a specified quantity of an item, identified by its item ID.</p>
+<aside class="notice">The <code>ItemID</code> class contains a list of item IDs for commonly used items.</aside>
+
+
+
+
+  
+
+
+
+<h2 id="depositallofitems">depositAllOfItems()</h2>
+<blockquote>
+<p>Overloads:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// The `...` means you can add as many params as you want</span>
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">depositAllOfItems</span>(<span style="color:#66d9ef">int</span> itemids...);
+</span></span></code></pre></div><blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">depositAllOfItems</span>(123, 456, 789);
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">depositAllOfItems</span>(ItemID.<span style="color:#a6e22e">CHARCOAL</span>, ItemID.<span style="color:#a6e22e">PAPYRUS</span>, ItemID.<span style="color:#a6e22e">ROPE</span>, ItemID.<span style="color:#a6e22e">CHAIR</span>);
+</span></span></code></pre></div><p>Deposits all items matching the provided item IDs.</p>
+<aside class="notice">The <code>ItemID</code> class contains a list of item IDs for commonly used items.</aside>
+
+
+
+
+  
+
+
+
+<h2 id="withdrawxofitem">withdrawXOfItem()</h2>
+<blockquote>
+<p>Overloads:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">withdrawXOfItem</span>(<span style="color:#66d9ef">int</span> itemid, <span style="color:#66d9ef">int</span> quantity);
+</span></span></code></pre></div><blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">withdrawXOfItem</span>(123, 2);
+</span></span><span style="display:flex;"><span>utils.<span style="color:#a6e22e">bank</span>.<span style="color:#a6e22e">withdrawXOfItem</span>(ItemID.<span style="color:#a6e22e">KNIFE</span>, 2);
+</span></span></code></pre></div><p>Deposits all items matching the provided item IDs.</p>
+<aside class="notice">The <code>ItemID</code> class contains a list of item IDs for commonly used items.</aside>
+
+  
+    
+
+
+
+  
+
+
+
+<h1 id="errors">Errors</h1>
+<aside class="notice">This error section is stored in a separate file, errors.md. DocuAPI allows you to split the single page documentation in as many files as needed. Files are included in the  default Hugo page order . One way of ordering the pages is by setting the page `weight` in the front matter. Pages with lower weight will be listed first.</aside>
+<p>The Kittn API uses the following error codes:</p>
+
+
+
+
+  
+
+
+
+<h2 id="4xx">4xx</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Error Code</th>
+          <th>Meaning</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>400</td>
+          <td>Bad Request &ndash; Your request sucks</td>
+      </tr>
+      <tr>
+          <td>401</td>
+          <td>Unauthorized &ndash; Your API key is wrong</td>
+      </tr>
+      <tr>
+          <td>403</td>
+          <td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+      </tr>
+      <tr>
+          <td>404</td>
+          <td>Not Found &ndash; The specified kitten could not be found</td>
+      </tr>
+      <tr>
+          <td>405</td>
+          <td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+      </tr>
+      <tr>
+          <td>406</td>
+          <td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+      </tr>
+      <tr>
+          <td>410</td>
+          <td>Gone &ndash; The kitten requested has been removed from our servers</td>
+      </tr>
+      <tr>
+          <td>418</td>
+          <td>I&rsquo;m a teapot</td>
+      </tr>
+      <tr>
+          <td>429</td>
+          <td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+
+  
+
+
+
+<h2 id="5xx">5xx</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Error Code</th>
+          <th>Meaning</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>500</td>
+          <td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+      </tr>
+      <tr>
+          <td>503</td>
+          <td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance. Please try again later.</td>
+      </tr>
+  </tbody>
+</table>
+
+  
+
+      </div>
+      <div class="dark-box">
+        
+          <div
+            class="lang-selector"
+            x-data="langController"
+            x-init="initLangs([{&#34;key&#34;:&#34;java&#34;,&#34;name&#34;:&#34;Java&#34;}])">
+            <template x-for="(tab, index) in tabs">
+              <a
+                x-text="tab.name"
+                :class="{ 'active': tab.active }"
+                @click="changeLanguage(index)"></a>
+            </template>
+          </div>
+        
+      </div>
+    </div>
+    
+  </body>
+</html>

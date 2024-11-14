@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://example.org/guides/main/</loc>
+  </url><url>
+    <loc>https://example.org/api_temp/bankqueries/</loc>
+  </url><url>
+    <loc>https://example.org/api_temp/bankcommands/</loc>
+  </url><url>
+    <loc>https://example.org/api_temp/errors/</loc>
+  </url><url>
+    <loc>https://example.org/api_temp/</loc>
+  </url><url>
+    <loc>https://example.org/categories/</loc>
+  </url><url>
+    <loc>https://example.org/guides/</loc>
+  </url><url>
+    <loc>https://example.org/</loc>
+  </url><url>
+    <loc>https://example.org/tags/</loc>
+  </url>
+</urlset>
