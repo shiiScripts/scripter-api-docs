@@ -5,7 +5,7 @@ title: API Reference
 
 # Introduction
 
-Shismo Scripter is a plugin which reads and executes code based on both Shismo's and RuneLite's inbuilt APIs. You can create your own completely customisable automated scripts written in Java/Groovy.
+Shismo Scripter is a plugin which reads and executes code based on both Shismo's and RuneLite's inbuilt APIs. You can create your own completely customisable automated scripts written in JavaScript with Java bindings.
 
 **How do I use this documentation?**
 
@@ -59,6 +59,8 @@ utils.event.npcSpawned(NpcID.HANS);
 utils.bank.addLog("This will only run if Mr Hans spawns, otherwise it will never run.");
 ```
 
+
+
 Shismo Scripter has **three** main types of functions:
 
 - **Queries:** Returns a value of some type when called.
@@ -72,7 +74,7 @@ Events can pause script execution forever if the condition is never satisfied, k
 </aside>
 
 ## Code Editor
-The inbuilt code editor comes with auto code completion. This is accessible via pressing `ctrl + click`.
+The inbuilt code editor comes with auto code completion. This is accessible via pressing `ctrl + space`, or by ending a package name with a `.` eg `utils.`
 
 <aside class="notice">
 Error logs are posted to the in-built script logger. You can access the logger via the button in the Scripter panel.
@@ -108,19 +110,20 @@ Enum class for in game NpcIDs.
 Enum class for in game ObjectIDs.
 
 ## Utils
-
-A set of common utilities that link to our very own Shismo Utils.
-
 > Examples:
 ```java
-utils.bank.function();
-utils.debug.function();
-utils.event.function();
-utils.inventory.function();
-utils.npc.function();
-utils.object.function();
-utils.player.function();
-utils.prayer.function();
-utils.walk.function();
-utils.widget.function();
+utils.bank.
+utils.debug.
+utils.event.
+utils.inventory.
+utils.npc.
+utils.object.
+utils.player.
+utils.prayer.
+utils.walk.
+utils.widget.
 ```
+A set of common utilities that link to our very own Shismo Utils. Look the the right!
+
+
+
